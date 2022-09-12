@@ -1,4 +1,4 @@
-#include <stdo.h>
+#include <stdio.h>
 /**
  * main - Print single digit numbers starting from 0
  *
