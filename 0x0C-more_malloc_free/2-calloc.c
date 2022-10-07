@@ -9,7 +9,7 @@
  * Return: pionter
  */
 
-void *_calloc(unsigned int nmeb, unsigned int size)
+void *_calloc(unsigned int nmemb, unsigned int size)
 {
 	unsigned int i;
 	char *ptr;
