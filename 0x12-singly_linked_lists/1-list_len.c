@@ -1,18 +1,24 @@
 #include "lists.h"
+
+
 /**
- * list_len - Calculate the number of elements
- * @h: Pointer to a list
- * Return: Integer
- **/
+ * list_len - function that return the number of elements of a list_t list
+ * @h: list type
+ * Return: the number of nodes
+ */
+
+
 size_t list_len(const list_t *h)
 {
-	const list_t *temp;
-	unsigned int counter = 0;
-	temp = h;
-	while (temp)
+	size_t size = 0;
+
+
+	if (!h)
+		return (0);
+	while (h)
 	{
-		counter++;
-		temp = temp->next;
+		h = h->next;
+		size++;
 	}
-	return (counter);
+	return (size);
 }
