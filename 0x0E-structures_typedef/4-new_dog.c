@@ -24,7 +24,7 @@ int _strlen(char *s)
 }
 
 /**
- * *strcpy - copy string lateral to allocated memory
+ * *_strcpy - copy string lateral to allocated memory
  * including the terminating null byte(\0)
  *
  * @dest: pointer to buffer
