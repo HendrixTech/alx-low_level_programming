@@ -1,80 +1,51 @@
-#include "variadic_functions.h"
 #include <stdio.h>
+#include <stdlib.h>
 #include <stdarg.h>
 
-
-typedef struct ft
-{
-	char f;
-	void (*func)();
-} ft_t;
-
-
-void p_char(va_list a)
-{
-	printf("%c", va_arg(a, int));
-}
-
-
-void p_int(va_list a)
-{
-	printf("%d", va_arg(a, int));
-}
-
-
-void p_float(va_list a)
-{
-	printf("%f", va_arg(a, double));
-}
-
-
-void p_string(va_list a)
-{
-	char *s = va_arg(a, char *);
-
-
-	if (!s)
-		s = "(nil)";
-	printf("%s", s);
-}
-
-
 /**
- * print_all - function that prints anything
- * @format: array of format
- * Return: void
- */
-
-
+  *print_all - prints anything.
+  *@format: list of all arguments passed to the function.
+  *
+  *Return: void.
+  */
 void print_all(const char * const format, ...)
 {
-	va_list str;
-	int i = 0, j;
-	char *sep = "";
-	ft_t arr[] = {
-		{'c', p_char},
-		{'i', p_int},
-		{'f', p_float},
-		{'s', p_string}
-	};
+	unsigned int i;
+	va_list args;
+	char *s, *separator;
 
+	va_start(args, format);
 
-	va_start(str, format);
-	while (format[i])
+	separator = "";
+
+	i = 0;
+	while (format && format[i])
 	{
-		j = 0;
-		while (j < 4)
+		switch (format[i])
 		{
-			if (format[i] == arr[j].f)
-			{
-				printf("%s", sep);
-				arr[j].func(str);
-				sep = ", ";
-			}
-			j++;
+			case 'c':
+				printf("%s%c", separator,  va_arg(args, int));
+				break;
+			case 'i':
+				printf("%s%d", separator, va_arg(args, int));
+				break;
+			case 'f':
+				printf("%s%f", separator, va_arg(args, double));
+				break;
+			case 's':
+				s = va_arg(args, char *);
+				if (s == NULL)
+					s = "(nil)";
+				printf("%s%s", separator, s);
+				break;
+			default:
+				i++;
+				continue;
 		}
+		separator = ", ";
 		i++;
 	}
-	va_end(str);
+
 	printf("\n");
+	va_end(args);
 }
